@@ -29,44 +29,27 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+class MyHomePage extends StatelessWidget {
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  void decrement() {
 
-  void _decrementCounter() {
-        setState(() {
-
-      _counter--;
-    });
   }
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+
+  void increment() {
+
   }
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
 
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-        title: Text(widget.title),
-      ),
       body: Center(
 
         child: Column(
@@ -77,28 +60,28 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '0',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-
-             TextButton(
-              onPressed: _decrementCounter,
-              child: const Text(
-                "Decrement",
-                style: TextStyle(fontSize: 25),
-              ),
-              
-            )
-
           ],
         ),
       ),
       
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), 
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget> [    
+          const SizedBox(height: 8.0),  
+          FloatingActionButton(
+            onPressed: () {},
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          ), 
+                    FloatingActionButton(
+            onPressed: () {},
+            tooltip: 'Decrement',
+            child: const Icon(Icons.remove),
+          ), 
+        ],)
     );
   }
 }
