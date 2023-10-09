@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mywebapp/cubit/counter/counter_cubit.dart';
+import 'package:mywebapp/otherpage.dart';
 
 
 Stream<int> countStream (int max) async* {
@@ -42,21 +43,33 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
-  void decrement() {
 
-  }
-
-  void increment() {
-
-  }
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: BlocBuilder<CounterCubit, CounterState> (
+      body: BlocConsumer<CounterCubit, CounterState> (
+         listener: (context, state) {
+            if (state.counter == 5){
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: Text('counter is ${state.counter}')
+                );
+              }
+            );
+          } else if (state.counter == -1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                return const OtherPage();
+              })
+            );
+          }},
          builder: (context, state) {
-          return Center(
+           return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
